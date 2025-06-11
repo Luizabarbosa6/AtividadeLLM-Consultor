@@ -13,37 +13,30 @@ app.use(express.static("public"));
 app.post("/analise-curriculo", async (req, res) => {
     const { textoUsuario, tipo } = req.body;
 
-    const prompt =
-        tipo === "curriculo"
-            ? `Você é um consultor de RH experiente. Analise e sugira melhorias para o seguinte perfil profissional, pensando em como estruturá-lo como um currículo eficaz. Considere as boas práticas de recrutamento e organização de conteúdo. Oriente com clareza, destacando os seguintes pontos:
+   const prompt =
+  tipo === "curriculo"
+    ? `Você é um consultor de RH experiente. Analise e sugira melhorias para o seguinte perfil profissional, estruturando-o como um currículo eficaz. Forneça orientações claras e objetivas sobre como organizar e apresentar cada parte, sem usar marcadores como asteriscos (*), traços (-) ou bullets. Prefira uma resposta com seções bem delimitadas por títulos, e o conteúdo em forma de parágrafo corrido ou enumeração simples.
 
-1. Seção "Resumo Profissional":
-- Ajude o usuário a criar um parágrafo introdutório que destaque sua experiência, área de atuação e principais competências.
+Instruções:
 
-2. Seção "Habilidades Técnicas":
-- Organize as habilidades de forma clara e categorizada.
-- Sugira uma estrutura como:
-  Linguagens de Programação: (ex: JavaScript, Python)
-  Backend: (ex: Node.js, Express, REST APIs)
-  Frontend: (ex: React, HTML, CSS)
-  Bancos de Dados: (ex: MongoDB, PostgreSQL)
-  Ferramentas: (ex: Git, GitHub, Docker, Postman)
-  Metodologias: (ex: Agile, Scrum)
+1. Resumo Profissional:
+Descreva como o usuário pode escrever um parágrafo introdutório sobre sua experiência, área de atuação e competências.
 
-3. Seção "Formação Acadêmica":
-- Sugira como apresentar a formação: nome do curso, instituição, período ou status atual.
+2. Habilidades Técnicas:
+Oriente como listar as habilidades separadas por categoria (ex: Linguagens de Programação, Backend, Frontend, Bancos de Dados, Ferramentas, Metodologias).
 
-4. Seção "Experiências Profissionais ou Projetos":
-- Oriente como listar experiências ou projetos, com foco em resultados e aprendizados.
-- Inclua estrutura com: Nome do projeto/empresa, papel desempenhado, tecnologias usadas, resultados alcançados.
+3. Formação Acadêmica:
+Explique como formatar corretamente essa seção com curso, instituição e período.
 
-5. Linguagem e formatação:
-- Certifique-se de que a linguagem esteja clara, objetiva e profissional.
-- Evite frases muito genéricas. Dê exemplos práticos e sugestões específicas.
+4. Experiências Profissionais ou Projetos:
+Instrua como apresentar os projetos ou experiências anteriores, com nome, papel desempenhado, tecnologias usadas e resultados obtidos.
+
+5. Linguagem e Apresentação:
+Assegure-se de que o tom seja profissional, direto e com exemplos específicos quando necessário. Evite repetições ou frases genéricas.
 
 Aqui está o perfil fornecido pelo usuário:
 ${textoUsuario}`
-            : `Você é um recrutador experiente. Simule uma entrevista de emprego com base no perfil profissional descrito abaixo. Comece com perguntas básicas, depois aprofunde com perguntas técnicas e comportamentais conforme o conteúdo apresentado:
+    : `Você é um recrutador experiente. Simule uma entrevista de emprego com base no perfil profissional descrito abaixo. Comece com perguntas básicas e evolua para perguntas técnicas e comportamentais, adaptadas ao conteúdo apresentado. Escreva de forma clara e sem usar marcadores como asteriscos (*), traços (-) ou bullets. 
 
 Perfil do candidato:
 ${textoUsuario}`;
